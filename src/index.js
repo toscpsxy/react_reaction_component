@@ -21,23 +21,25 @@ const myDidMount = async ({ state, setState, props, forceUpdate }) => {
 
 function App() {
   return (
-    <Component initialState={{ name: "Brown" }} didMount={myDidMount}>
-      {({ state, setState }) => {
-        return (
+    <Component initialState={{ name: "" }} didMount={myDidMount}>
+      {({ state, setState }) =>
+        state.name ? (
           <div>
             <label>
               Name :
               <input
                 type="text"
                 autocomplete="name"
-                value={state.name}
+                defaultValue={state.name}
                 onInput={e => setState({ name: e.target.value })}
               />
             </label>
             <h1>Hello {state.name}</h1>
           </div>
-        );
-      }}
+        ) : (
+          <h1>Loading ... </h1>
+        )
+      }
     </Component>
   );
 }
